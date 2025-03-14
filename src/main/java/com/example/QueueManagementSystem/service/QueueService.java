@@ -1,11 +1,12 @@
 package com.example.QueueManagementSystem.service;
 
 import com.example.QueueManagementSystem.helper.QueueStatus;
-import com.example.QueueManagementSystem.models.Queue;
 
 public interface QueueService {
     String addQueue();
     QueueStatus getQueueStatus(String queueNumber);
-    void callNextQueue(Integer operatorId);
+    String callNextQueue(Integer operatorId,Boolean customerCame);
     void completeQueue(String queueNumber);
+    void comeQueue(String queueNumber);
+    void deleteExpiredQueues();
 }

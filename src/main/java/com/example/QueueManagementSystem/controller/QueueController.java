@@ -22,12 +22,22 @@ public class QueueController {
     }
 
     @PostMapping("callQueue")
-    public void callQueue(@RequestParam Integer operatorId) {
-         queueService.callNextQueue(operatorId);
+    public void callQueue(@RequestParam Integer operatorId,@RequestParam Boolean customerCame) {
+         queueService.callNextQueue(operatorId,customerCame);
     }
 
     @PostMapping("complete/{queueNumber}")
     public void completeQueue(@RequestParam String queueNumber) {
         queueService.completeQueue(queueNumber);
+    }
+
+    @PostMapping("comeQueue/{queueNumber}")
+    public void comeQueue(@RequestParam String queueNumber) {
+        queueService.comeQueue(queueNumber);
+    }
+
+    @DeleteMapping("clear-expired")
+    public void clearExpiredQueues() {
+        queueService.deleteExpiredQueues();
     }
 }
