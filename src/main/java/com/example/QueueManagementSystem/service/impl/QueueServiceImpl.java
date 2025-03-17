@@ -76,6 +76,9 @@ public class QueueServiceImpl implements QueueService {
     public void comeQueue(String queueNumber) {
         Queue existQueue = queueRepository.findByQueueNumber(queueNumber)
                 .orElseThrow(() -> new IllegalArgumentException("Queue can't find"));
+        if(existQueue.getStatus().equals(QueueStatus.Expired)) {
+            throw new IllegalArgumentException("Queue is expired");
+        }
         existQueue.setStatus(QueueStatus.In_Service);
         existQueue.setUpdatedAt(LocalDateTime.now());
         queueRepository.save(existQueue);
